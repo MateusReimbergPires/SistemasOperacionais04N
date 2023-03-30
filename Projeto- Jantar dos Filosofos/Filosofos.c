@@ -1,15 +1,28 @@
- /*
+/*
+Integrantes:
+
  Mateus Reimberg - TIA: 42105838
  Guilherme Leme - TIA: 42136199
  Marco Antonio - TIA: 42133092
+ 
+ ---------------------------------------------------------------------------------------------------------
+ 
+b) Explique, em cada trecho do seu programa, como é resolvido o problema da comunicação inter processos (IPC).
+
+ R: A solução do problema da comunicação inter processos (IPC) ocorre através do uso de semaforos,
+mais especificamente, com a utilização do "sem_wait()" e "sem_post()", onde são responsaveis por cuidar
+de quando um filosofo pega um talher na sua vez, e após utilizalo, que ocorra sua devolução.
+
 */
 
+// Bibliotecas
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <semaphore.h>
 
+// Constantes
 #define FILOSOFOS_GARFOS 5
 
 // Criacao Threads e Semaforos 
@@ -35,6 +48,7 @@ void pegar(int garfo_esquerda, int garfo_direita, int id_filosofo){
 
 void comer(int id_filosofo){
     printf("O Filosofo %d está comendo.\n", id_filosofo);
+    sleep(1);
 }
 
 void largar(int garfo_esquerda, int garfo_direita, int id_filosofo){
