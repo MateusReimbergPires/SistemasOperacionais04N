@@ -1,11 +1,3 @@
-/******************************************************************************
-
-Welcome to GDB Online.
-  GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
-  C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, COBOL, HTML, CSS, JS
-  Code, Compile, Run and Debug online from anywhere in world.
-
-*******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,28 +6,41 @@ Welcome to GDB Online.
 
 // Constantes
 #define VALOR_TRANSACAO 10
-
+#define QUANTIDADE_TRANSACAO 100
 
 //Estrutura
-struct contaBancaria {
- int saldo;
+struct contaBancaria{
+    int saldo;
 };
-typedef struct contaBancaria conta;
-conta from, to;
-int valor;
-
-// Criacao Threads e Semaforos
-pthread_t transacoes;
-sem_t mutex;
-
 
 // Funcoes
-int main()
-{
-    from.saldo = 100;
-    to.saldo = 0;   
+void* transferirValor(int valor, struct contaBancaria *de, struct contaBancaria *para){
+    if (de->saldo < valor){
+        printf("Saldo insuficiente!\n");
+        return 1;
+    }
+    de->saldo-=valor;
+    para->saldo+=valor;
+    return 0;
+}
 
+
+
+int main (){
+
+    pthread_t threads[QUANTIDADE_TRANSACAO];
+
+    for (i = 0; i < QUANTIDADE_TRANSACAO; i++){
+        pthread_create(&threads[i]; NULL; transferirValor; args)
+    }
+
+    struct contaBancaria from, to;
+    from.saldo = 0;
+    to.saldo = 1000;
+
+    transferirValor(10, &to, &from);
     // Acesso ao saldo
     printf("teste valor conta (from): %d \n", from.saldo);
     printf("teste valor conta (to): %d \n", to.saldo);
+    return 0;
 }
